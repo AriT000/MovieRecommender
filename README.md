@@ -19,4 +19,4 @@ Recommender for movies based on preferences
 https://www.kaggle.com/datasets/tmdb/tmdb-movie-metadata
 
 Cleaned Dataset:  
-![alt text]()
+![alt text](https://github.com/AriT000/MovieRecommender/blob/main/images/image-1.png)
