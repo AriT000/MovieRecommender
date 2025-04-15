@@ -4,7 +4,7 @@ import json
 import joblib
 
 movies = pickle.load(open('artifacts/movie_list.pkl', 'rb'))
-similarity = joblib.load('artifacts/similarity.pkl')
+similarity = joblib.load('artifacts/similarity_compressed.pkl')
 
 movie_list = movies['title'].values
 
