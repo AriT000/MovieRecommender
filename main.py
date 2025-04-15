@@ -1,9 +1,10 @@
 from bottle import Bottle, run, route, request, template, static_file
 import pickle
 import json
+import joblib
 
 movies = pickle.load(open('artifacts/movie_list.pkl', 'rb'))
-similarity = pickle.load(open('artifacts/similarity.pkl', 'rb'))
+similarity = joblib.load('artifacts/similarity.pkl')
 
 movie_list = movies['title'].values
 
