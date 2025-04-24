@@ -7,9 +7,6 @@ This is a web-based movie recommender system that suggests similar movies based 
 - Autocomplete search with keyboard navigation
 - Movie poster display using TMDB API
 - Genre badges under each recommended movie
-- Clickable genre badges for recommendation filtering
-- Fade-in animation on first page load and search results
-- Shimmer placeholder cards while results are loading
 - Client-side caching of API results for faster repeat searches
 
 ## How to Run
