@@ -3,6 +3,13 @@ import pickle
 import joblib
 import json
 import os
+from dotenv import load_dotenv
+import requests
+
+load_dotenv()
+tmdb_key = os.getenv('TMDB_API_KEY')
+if not tmdb_key:
+    raise ValueError("TMDB_API_KEY not found in environment variables.")
 
 app = Flask(__name__)
 
@@ -42,6 +49,40 @@ def recommend_route():
     movie = request.args.get('movie')
     recommendations = recommend(movie)
     return jsonify(recommendations)
+
+@app.route('/tmdb/<title>')
+def get_tmdb_data(title):
+    url = f"https://api.themoviedb.org/3/search/movie"
+    params = {
+        'api_key': tmdb_key,
+        'query': title
+    }
+    response = requests.get(url, params=params)
+    return jsonify(response.json())
+
+@app.route('/tmdb-genres')
+def get_genres():
+    import requests, os
+    from flask import jsonify
+    from dotenv import load_dotenv
+
+    load_dotenv()
+    tmdb_key = os.getenv("TMDB_API_KEY")
+    
+    url = f"https://api.themoviedb.org/3/genre/movie/list"
+    params = {
+        'api_key': tmdb_key,
+        'language': 'en-US'
+    }
+
+    response = requests.get(url, params=params)
+
+    try:
+        data = response.json()
+        return jsonify(data)
+    except Exception as e:
+        return jsonify({'error': 'Failed to fetch genre data', 'details': str(e)}), 500
+
 
 if __name__ == "__main__":
     # Tell Flask where to look for static files
